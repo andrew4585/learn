@@ -37,14 +37,14 @@ javascript部分：
 AJS.$(".equipment").auiSelect2({
     placeholder:"请选择",
     ajax:{
-        delay   : 1000,
+        quietMillis   : 1000,
         url     : "${req.getContextPath()}/plugins/servlet/emtcserver",
         dataType : 'json',
         type    : "post",
-        data    : function(params){
+        data    : function(param,page){
             return {
                 method : "equipmentList",
-                search  : params.term,
+                search  : param,
                 orderid : AJS.$("input.orderid").val() ,
             }
         },
