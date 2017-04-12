@@ -45,7 +45,6 @@
 
 ``` Java
 @ExportAsService
-@Component
 @Named("eventListener")
 public class IssueCreatedResolvedListener implements InitializingBean, DisposableBean {
 
@@ -97,25 +96,16 @@ public class IssueCreatedResolvedListener implements InitializingBean, Disposabl
 
         if (eventTypeId.equals(EventType.ISSUE_CREATED_ID)) {
             //新增bug
-            System.out.println("ISSUE_CREATED_ID");
-            log.info("Issue {} has been created at {}.", issue.getKey(), issue.getCreated());
         } else if (eventTypeId.equals(EventType.ISSUE_RESOLVED_ID)) {
-            System.out.println("ISSUE_RESOLVED_ID");
-            log.info("Issue {} has been resolved at {}.", issue.getKey(), issue.getResolutionDate());
         } else if (eventTypeId.equals(EventType.ISSUE_CLOSED_ID)) {
-            System.out.println("ISSUE_CLOSED_ID");
-            log.info("Issue {} has been closed at {}.", issue.getKey(), issue.getUpdated());
         } else if (eventTypeId.equals(EventType.ISSUE_UPDATED_ID)){
             //修改bug
-            System.out.println("ISSUE_UPDATED_ID");
         } else if ( eventTypeId.equals( EventType.ISSUE_COMMENT_DELETED_ID ) ){
             //删除bug
         }else if (eventTypeId.equals(EventType.ISSUE_ASSIGNED_ID)){
             //修改指派人
-            System.out.println("ISSUE_ASSIGNED_ID");
         } else if (eventTypeId.equals(EventType.ISSUE_GENERICEVENT_ID)){
             //修改bug状态
-            System.out.println("ISSUE_GENERICEVENT_ID");
         } else if (eventTypeId.equals(EventType.ISSUE_COMMENTED_ID)){
             //新增comment
         } else if ( eventTypeId.equals( EventType.ISSUE_COMMENT_EDITED_ID ) ){
@@ -125,4 +115,14 @@ public class IssueCreatedResolvedListener implements InitializingBean, Disposabl
         }
     }
 }
+```
+
+* 获取自定义字段的值
+
+``` Java
+List<CustomField> customfields = ComponentAccessor.getCustomFieldManager().getCustomFieldObjects(issue);
+for (CustomField customfield : customfields) {
+    System.out.println(customfield.getFieldName()+":"+customfield.getValue(issue));
+}
+
 ```
