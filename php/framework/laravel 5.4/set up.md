@@ -16,5 +16,5 @@
 * step 4 ： 开启php服务（无需使用wamp）
 
     ``` shell
-    php artisan server
+    php artisan serve
     ```
